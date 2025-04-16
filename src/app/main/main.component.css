@@ -1,10 +1,11 @@
 .main-navbar {
     background-color: white;
-    padding: 10px;
+    padding: 0;
     display: flex;
-    flex-wrap: wrap;
     gap: 6px;
-    border-bottom: 3px solid #A6CE39;
+    align-items: end;
+    border-bottom: 5px solid #A6CE39;
+    /* no extra line from navbar */
 }
 
 .nav-btn {
@@ -17,13 +18,16 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    border-bottom: 3px solid transparent;
+    border: none;
+    border-bottom: 4px solid transparent;
+    /* reserves space for active border */
 }
 
 .nav-btn.active {
     background-color: #A6CE39 !important;
     color: #0D2C6C !important;
-    border-bottom: 0px solid #A6CE39;
+    border-bottom: 4px solid #A6CE39;
+    /* solid green line connects button and border */
 }
 
 .chat-badge {
