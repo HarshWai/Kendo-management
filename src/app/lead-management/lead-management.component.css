@@ -159,3 +159,39 @@ button:hover {
     align-items: center;
     gap: 10px;
 }
+
+.no-hover-btn {
+    background-color: white !important;
+    color: #212529;
+    border: 1px solid #ccc;
+}
+
+.no-hover-menu {
+    background-color: white !important;
+    border: 1px solid #ccc;
+}
+
+.no-hover-item:hover,
+.no-hover-item:focus {
+    background-color: white !important;
+    color: inherit !important;
+    text-decoration: none;
+}
+
+.no-hover-btn {
+    background-color: white !important;
+    color: #212529;
+    border: 1px solid #ccc;
+}
+
+.no-hover-menu {
+    background-color: white !important;
+    border: 1px solid #ccc;
+}
+
+.no-hover-item:hover,
+.no-hover-item:focus {
+    background-color: white !important;
+    color: inherit !important;
+    text-decoration: none;
+}

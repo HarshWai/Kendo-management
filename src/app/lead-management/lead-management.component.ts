@@ -12,11 +12,13 @@ import { process } from "@progress/kendo-data-query";
 import { SVGIcon, fileExcelIcon, filePdfIcon } from "@progress/kendo-svg-icons";
 import { employees } from "./employees";
 import { images } from "./images"
+import { DropDownListComponent, DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-lead-management',
   standalone: true,
-  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT],
+  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS, DropDownListComponent, DropDownListModule],
   templateUrl: './lead-management.component.html',
   styleUrl: './lead-management.component.css'
 })
@@ -28,6 +30,40 @@ export class LeadManagementComponent implements OnInit {
   public mySelection: string[] = [];
   public pdfSVG: SVGIcon = filePdfIcon;
   public excelSVG: SVGIcon = fileExcelIcon;
+
+  selectedLeadValue!: string;
+  defaultLead = 'Select a Lead';
+  allLeadsOptions = [
+    { text: 'Lead 1', value: 'lead1' },
+    { text: 'Lead 2', value: 'lead2' },
+    { text: 'Lead 3', value: 'lead3' },
+  ];
+
+  selectLead(lead: any) {
+    this.selectedLeadValue = lead.text;
+  }
+
+  selectedPreference: string = '';
+
+  // List of saved preferences
+  allPreferences: string[] = ['Preference 1', 'Preference 2', 'Preference 3'];
+
+  // Method to handle selection of preference
+  selectPreference(preference: string): void {
+    this.selectedPreference = preference;
+    console.log('Selected Preference:', this.selectedPreference);
+  }
+
+  // public allLeadsOptions = [
+  //   { text: 'All Leads', value: 'all' },
+  //   { text: 'New Leads', value: 'new' },
+  //   { text: 'Contacted', value: 'contacted' },
+  //   { text: 'Qualified', value: 'qualified' }
+  // ];
+
+
+  // public defaultLead = { text: 'Select Lead Type', value: null };
+  // public selectedLeadValue: string | null = null;
 
   public ngOnInit(): void {
     this.gridView = this.gridData;

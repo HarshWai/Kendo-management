@@ -16,3 +16,137 @@
         </button>
     </div>
 </div>
+
+<kendo-grid
+    [kendoGridBinding]="gridView"
+    kendoGridSelectBy="id"
+    [(selectedKeys)]="mySelection"
+    [selectable]="{ mode: 'multiple', drag: true }"
+    [pageSize]="20"
+    [pageable]="true"
+    [sortable]="true"
+    [groupable]="false"
+    [reorderable]="true"
+    [resizable]="true"
+    [height]="500"
+    [columnMenu]="{ filter: true }">
+    <ng-template kendoGridToolbarTemplate>
+        <!-- Dropdown -->
+        <div class="dropdown" style="z-index: 1020;">
+            <button class="btn dropdown-toggle no-hover-btn" type="button"
+                id="dropdownMenuButton" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ selectedLeadValue || 'All Leads' }}
+            </button>
+            <ul class="dropdown-menu no-hover-menu"
+                aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectLead('Lead 1')">Lead 1</a></li>
+                <li><a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectLead('Lead 2')">Lead 2</a></li>
+                <li><a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectLead('Lead 3')">Lead 3</a></li>
+            </ul>
+        </div>
+
+        <div class="custom-dropdown position-relative" style="z-index: 1050;">
+            <button class="btn dropdown-toggle no-hover-btn" type="button"
+                id="dropdownPreferences" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ selectedPreference || 'Select Saved Preferences' }}
+            </button>
+            <ul class="dropdown-menu no-hover-menu"
+                aria-labelledby="dropdownPreferences">
+                <li>
+                    <a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectPreference('Preference 1')">
+                        Preference 1
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectPreference('Preference 2')">
+                        Preference 2
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item no-hover-item" href="#"
+                        (click)="selectPreference('Preference 3')">
+                        Preference 3
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <kendo-textbox
+            [style.width.px]="165"
+            placeholder="Type Search Keyword"
+            (valueChange)="onFilter($event)"></kendo-textbox>
+        <!-- Include this in your Bootstrap-based layout -->
+        <!-- Custom Search Button with Green Background -->
+        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
+            style="background-color: #A6CE39;">
+            <i class="fa fa-search"></i>
+
+        </button>
+
+        <kendo-grid-spacer></kendo-grid-spacer>
+        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
+            style="background-color: #A6CE39;">
+            <span>Clear filter</span>
+
+        </button>
+        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
+            style="background-color: #A6CE39;">
+            <span>Bulk Edit</span>
+
+        </button>
+        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
+            style="background-color: #A6CE39;">
+            <span>Save Preferances</span>
+
+        </button>
+
+    </ng-template>
+    <kendo-grid-checkbox-column
+        [width]="45"
+        [headerClass]="{ 'text-center': true }"
+        [class]="{ 'text-center': true }"
+        [resizable]="false"
+        [columnMenu]="false"
+        [showSelectAll]="true"></kendo-grid-checkbox-column>
+
+    <kendo-grid-column field="Action" title="Action"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="record_id" title="Record Id"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="last_name" title="Last Name"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="first_name" title="First Name"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="email" title="Email Address"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="phone_type" title="Phone Type"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="lmp_id" title="LMP Lead Id"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="appointment_type" title="Appointment Type"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="booking_agency" title="Booking Agency"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="assigned_date" title="Assigned Date"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="sales_rep" title="Sales Rep"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="coordinator" title="Coordinator"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="sync_to_mobile" title="Sync to Mobile"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="created_sources" title="Created Sources"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="mobile_sync_status" title="Mobile Sync Status"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="effective_date" title="Effective Date"
+        [width]="220"></kendo-grid-column>
+
+</kendo-grid>
