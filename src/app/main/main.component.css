@@ -1,0 +1,39 @@
+.main-navbar {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 3px solid #A6CE39;
+}
+
+.nav-btn {
+    background-color: #0D2C6C !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 16px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-btn.active {
+    background-color: #A6CE39 !important;
+    color: #0D2C6C !important;
+    border-bottom: 0px solid #A6CE39;
+}
+
+.chat-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #A6CE39;
+    color: #0D2C6C;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+}

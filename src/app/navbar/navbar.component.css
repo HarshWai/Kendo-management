@@ -1,0 +1,44 @@
+.custom-navbar {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.icon-btn {
+    background-color: #0D2C6C;
+    color: white;
+    margin: 0 5px;
+    font-size: 0.9rem;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.icon-btn i {
+    font-size: 1.1rem;
+}
+
+.icon-btn:hover {
+    background-color: #0b255c;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 0.65rem;
+    padding: 0.2em 0.5em;
+}
+
+.admin-info .avatar {
+    background-color: #0D2C6C;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}

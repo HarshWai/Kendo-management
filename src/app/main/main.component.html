@@ -1,0 +1,50 @@
+<nav class="main-navbar">
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Dashboard'}"
+        (click)="selectButton('Dashboard')">
+        <i class="bi bi-speedometer2 me-1"></i> Dashboard
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Agent Management'}"
+        (click)="selectButton('Agent Management')">
+        <i class="bi bi-person-vcard me-1"></i> Agent Management
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Calendar'}"
+        (click)="selectButton('Calendar')">
+        <i class="bi bi-calendar3 me-1"></i> Calendar
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'EZ Quote'}"
+        (click)="selectButton('EZ Quote')">
+        <i class="bi bi-journal-text me-1"></i> EZ Quote
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Lead Management'}"
+        (click)="selectButton('Lead Management')">
+        <i class="bi bi-diagram-3-fill me-1"></i> Lead Management
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Activities'}"
+        (click)="selectButton('Activities')">
+        <i class="bi bi-list-task me-1"></i> Activities
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Workflows'}"
+        (click)="selectButton('Workflows')">
+        <i class="bi bi-repeat me-1"></i> Workflows
+    </button>
+
+    <button kendoButton
+        [ngClass]="{'nav-btn': true, 'active': selectedButton === 'Chat'}"
+        (click)="selectButton('Chat')" class="position-relative">
+        <i class="bi bi-chat-left-dots me-1"></i> Chat
+        <span class="chat-badge">1</span>
+    </button>
+</nav>
