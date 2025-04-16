@@ -1,0 +1,121 @@
+/* Styling for the Lead Management component */
+
+/* General container styling */
+div {
+    font-family: Arial, sans-serif;
+    margin: 10px;
+}
+
+/* Header styling */
+h1 {
+    color: #A6CE39;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Sub-header styling */
+p {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 5px 0;
+}
+
+/* Checkbox and label alignment */
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Button styling */
+button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2ecc71;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Styling for the updated Lead Management component */
+
+/* Header Section */
+.header-title {
+    font-size: 24px;
+    color: #A6CE39;
+    font-style: bold;
+    margin-bottom: 5px;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: #A6CE39;
+    margin-bottom: 15px;
+}
+
+/* Actions Section */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.header-actions label {
+    font-size: 14px;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-actions button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-actions button:hover {
+    background-color: #0D2C6C;
+}
+
+.header-actions .export-button {
+    background-color: #A6CE39;
+}
+
+
+
+.header-actions .create-button {
+    background-color: #A6CE39;
+}

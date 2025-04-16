@@ -25,7 +25,7 @@
 
 .nav-btn.active {
     background-color: #A6CE39 !important;
-    color: #0D2C6C !important;
+    color: #ffffff !important;
     border-bottom: 4px solid #A6CE39;
     /* solid green line connects button and border */
 }
