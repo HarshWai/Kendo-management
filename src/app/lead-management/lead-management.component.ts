@@ -12,13 +12,14 @@ import { process } from "@progress/kendo-data-query";
 import { SVGIcon, fileExcelIcon, filePdfIcon } from "@progress/kendo-svg-icons";
 import { employees } from "./employees";
 import { images } from "./images"
-import { DropDownListComponent, DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
+import { DropDownListComponent, DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS, } from '@progress/kendo-angular-dropdowns';
 import { FormsModule, NgModel } from '@angular/forms';
+import { KENDO_BUTTONS } from '@progress/kendo-angular-buttons';
 
 @Component({
   selector: 'app-lead-management',
   standalone: true,
-  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS, DropDownListComponent, DropDownListModule],
+  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS, DropDownListModule, KENDO_BUTTONS],
   templateUrl: './lead-management.component.html',
   styleUrl: './lead-management.component.css'
 })
