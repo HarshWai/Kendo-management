@@ -116,8 +116,12 @@
         [columnMenu]="false"
         [showSelectAll]="true"></kendo-grid-checkbox-column>
 
-    <kendo-grid-column field="Action" title="Action"
-        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="Action" title="Action" [width]="220">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <button class="btn btn-primary"
+                (click)="onActionClick(dataItem)">Action</button>
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="record_id" title="Record Id"
         [width]="220"></kendo-grid-column>
     <kendo-grid-column field="last_name" title="Last Name"
@@ -147,6 +151,8 @@
     <kendo-grid-column field="mobile_sync_status" title="Mobile Sync Status"
         [width]="220"></kendo-grid-column>
     <kendo-grid-column field="effective_date" title="Effective Date"
+        [width]="220"></kendo-grid-column>
+    <kendo-grid-column field="valid_through" title="Valid Through"
         [width]="220"></kendo-grid-column>
 
 </kendo-grid>
