@@ -155,4 +155,15 @@
     <kendo-grid-column field="valid_through" title="Valid Through"
         [width]="220"></kendo-grid-column>
 
+    <!-- Move the Edit column to the right side of the page by placing it at the end -->
+    <kendo-grid-column field="edit" title="Edit" [width]="220" [sticky]="true"
+        class="d-flex">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <button class="btn btn-primary "
+                (click)="onEdit(dataItem)">Edit</button>
+            <button class="btn btn-danger"
+                (click)="onDelete(dataItem)">Delete</button>
+        </ng-template>
+    </kendo-grid-column>
+
 </kendo-grid>

@@ -281,8 +281,13 @@ export class LeadManagementComponent implements OnInit {
   }
 
   public onEdit(dataItem: any): void {
-    console.log('Edit button clicked for:', dataItem);
-    // Add your custom logic for editing the data item here
+    console.log('Edit action triggered for:', dataItem);
+    // Add your edit logic here
+  }
+
+  public onDelete(dataItem: any): void {
+    console.log('Delete action triggered for:', dataItem);
+    // Add your delete logic here
   }
 
   public onSave(dataItem: any): void {
