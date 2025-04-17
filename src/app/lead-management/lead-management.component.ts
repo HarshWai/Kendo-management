@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { KENDO_CHARTS } from "@progress/kendo-angular-charts";
 import {
   DataBindingDirective,
+  ExcelModule,
   KENDO_GRID,
   KENDO_GRID_EXCEL_EXPORT,
   KENDO_GRID_PDF_EXPORT,
@@ -15,11 +17,13 @@ import { images } from "./images"
 import { DropDownListComponent, DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS, } from '@progress/kendo-angular-dropdowns';
 import { FormsModule, NgModel } from '@angular/forms';
 import { KENDO_BUTTONS } from '@progress/kendo-angular-buttons';
+import * as XLSX from 'xlsx';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 
 @Component({
   selector: 'app-lead-management',
   standalone: true,
-  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS, DropDownListModule, KENDO_BUTTONS],
+  imports: [CommonModule, KENDO_GRID, KENDO_CHARTS, KENDO_INPUTS, KENDO_GRID_EXCEL_EXPORT, KENDO_GRID_PDF_EXPORT, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS, DropDownListModule, KENDO_BUTTONS, ExcelExportModule, ExcelModule],
   templateUrl: './lead-management.component.html',
   styleUrl: './lead-management.component.css'
 })
@@ -40,124 +44,124 @@ export class LeadManagementComponent implements OnInit {
       sales_rep: 'Jane Doe',
       coordinator: 'Mark Lee',
       sync_to_mobile: true,
-      created_sources: 'Web',
-      mobile_sync_status: 'Synced',
-      effective_date: '2025-04-15',
-      valid_through: '2025-12-31'
+      created_sources: "Web",
+      mobile_sync_status: "Synced",
+      effective_date: "2025-04-15",
+      valid_through: "2025-12-31"
     },
     {
-      Action: 'View',
-      record_id: 'R002',
-      last_name: 'Doe',
-      first_name: 'Jane',
-      email: 'jane.doe@example.com',
-      phone_type: 'Home',
-      lmp_id: 'LMP456',
-      appointment_type: 'Follow-up',
-      booking_agency: 'Agency B',
-      assigned_date: '2025-04-05',
-      sales_rep: 'John Smith',
-      coordinator: 'Anna White',
+      Action: "View",
+      record_id: "R002",
+      last_name: "Doe",
+      first_name: "Jane",
+      email: "jane.doe@example.com",
+      phone_type: "Home",
+      lmp_id: "LMP456",
+      appointment_type: "Follow-up",
+      booking_agency: "Agency B",
+      assigned_date: "2025-04-05",
+      sales_rep: "John Smith",
+      coordinator: "Anna White",
       sync_to_mobile: false,
-      created_sources: 'Mobile',
-      mobile_sync_status: 'Pending',
-      effective_date: '2025-04-20',
-      valid_through: '2025-11-30'
+      created_sources: "Mobile",
+      mobile_sync_status: "Pending",
+      effective_date: "2025-04-20",
+      valid_through: "2025-11-30"
     },
     {
-      Action: 'Edit',
-      record_id: 'R003',
-      last_name: 'Brown',
-      first_name: 'Charlie',
-      email: 'charlie.brown@example.com',
-      phone_type: 'Work',
-      lmp_id: 'LMP789',
-      appointment_type: 'Initial Meeting',
-      booking_agency: 'Agency C',
-      assigned_date: '2025-04-10',
-      sales_rep: 'Alice Green',
-      coordinator: 'Bob Grey',
+      Action: "Edit",
+      record_id: "R003",
+      last_name: "Brown",
+      first_name: "Charlie",
+      email: "charlie.brown@example.com",
+      phone_type: "Work",
+      lmp_id: "LMP789",
+      appointment_type: "Initial Meeting",
+      booking_agency: "Agency C",
+      assigned_date: "2025-04-10",
+      sales_rep: "Alice Green",
+      coordinator: "Bob Grey",
       sync_to_mobile: true,
-      created_sources: 'Web',
-      mobile_sync_status: 'Synced',
-      effective_date: '2025-04-25',
-      valid_through: '2025-10-31'
+      created_sources: "Web",
+      mobile_sync_status: "Synced",
+      effective_date: "2025-04-25",
+      valid_through: "2025-10-31"
     },
     {
-      Action: 'View',
-      record_id: 'R004',
-      last_name: 'Taylor',
-      first_name: 'Chris',
-      email: 'chris.taylor@example.com',
-      phone_type: 'Mobile',
-      lmp_id: 'LMP101',
-      appointment_type: 'Follow-up',
-      booking_agency: 'Agency D',
-      assigned_date: '2025-04-12',
-      sales_rep: 'Diana Prince',
-      coordinator: 'Clark Kent',
+      Action: "View",
+      record_id: "R004",
+      last_name: "Taylor",
+      first_name: "Chris",
+      email: "chris.taylor@example.com",
+      phone_type: "Mobile",
+      lmp_id: "LMP101",
+      appointment_type: "Follow-up",
+      booking_agency: "Agency D",
+      assigned_date: "2025-04-12",
+      sales_rep: "Diana Prince",
+      coordinator: "Clark Kent",
       sync_to_mobile: false,
-      created_sources: 'Mobile',
-      mobile_sync_status: 'Pending',
-      effective_date: '2025-04-30',
-      valid_through: '2025-09-30'
+      created_sources: "Mobile",
+      mobile_sync_status: "Pending",
+      effective_date: "2025-04-30",
+      valid_through: "2025-09-30"
     },
     {
-      Action: 'Edit',
-      record_id: 'R005',
-      last_name: 'Johnson',
-      first_name: 'Alex',
-      email: 'alex.johnson@example.com',
-      phone_type: 'Home',
-      lmp_id: 'LMP202',
-      appointment_type: 'Consultation',
-      booking_agency: 'Agency E',
-      assigned_date: '2025-04-15',
-      sales_rep: 'Bruce Wayne',
-      coordinator: 'Diana Prince',
+      Action: "Edit",
+      record_id: "R005",
+      last_name: "Johnson",
+      first_name: "Alex",
+      email: "alex.johnson@example.com",
+      phone_type: "Home",
+      lmp_id: "LMP202",
+      appointment_type: "Consultation",
+      booking_agency: "Agency E",
+      assigned_date: "2025-04-15",
+      sales_rep: "Bruce Wayne",
+      coordinator: "Diana Prince",
       sync_to_mobile: true,
-      created_sources: 'Web',
-      mobile_sync_status: 'Synced',
-      effective_date: '2025-05-01',
-      valid_through: '2025-12-15'
+      created_sources: "Web",
+      mobile_sync_status: "Synced",
+      effective_date: "2025-05-01",
+      valid_through: "2025-12-15"
     },
     {
-      Action: 'View',
-      record_id: 'R006',
-      last_name: 'Williams',
-      first_name: 'Taylor',
-      email: 'taylor.williams@example.com',
-      phone_type: 'Work',
-      lmp_id: 'LMP303',
-      appointment_type: 'Initial Meeting',
-      booking_agency: 'Agency F',
-      assigned_date: '2025-04-18',
-      sales_rep: 'Clark Kent',
-      coordinator: 'Lois Lane',
+      Action: "View",
+      record_id: "R006",
+      last_name: "Williams",
+      first_name: "Taylor",
+      email: "taylor.williams@example.com",
+      phone_type: "Work",
+      lmp_id: "LMP303",
+      appointment_type: "Initial Meeting",
+      booking_agency: "Agency F",
+      assigned_date: "2025-04-18",
+      sales_rep: "Clark Kent",
+      coordinator: "Lois Lane",
       sync_to_mobile: false,
-      created_sources: 'Mobile',
-      mobile_sync_status: 'Pending',
-      effective_date: '2025-05-05',
-      valid_through: '2025-11-20'
+      created_sources: "Mobile",
+      mobile_sync_status: "Pending",
+      effective_date: "2025-05-05",
+      valid_through: "2025-11-20"
     },
     {
-      Action: 'Edit',
-      record_id: 'R007',
-      last_name: 'Davis',
-      first_name: 'Jordan',
-      email: 'jordan.davis@example.com',
-      phone_type: 'Mobile',
-      lmp_id: 'LMP404',
-      appointment_type: 'Follow-up',
-      booking_agency: 'Agency G',
-      assigned_date: '2025-04-20',
-      sales_rep: 'Lois Lane',
-      coordinator: 'Bruce Wayne',
+      Action: "Edit",
+      record_id: "R007",
+      last_name: "Davis",
+      first_name: "Jordan",
+      email: "jordan.davis@example.com",
+      phone_type: "Mobile",
+      lmp_id: "LMP404",
+      appointment_type: "Follow-up",
+      booking_agency: "Agency G",
+      assigned_date: "2025-04-20",
+      sales_rep: "Lois Lane",
+      coordinator: "Bruce Wayne",
       sync_to_mobile: true,
-      created_sources: 'Web',
-      mobile_sync_status: 'Synced',
-      effective_date: '2025-05-10',
-      valid_through: '2025-12-01'
+      created_sources: "Web",
+      mobile_sync_status: "Synced",
+      effective_date: "2025-05-10",
+      valid_through: "2025-12-01"
     },
     {
       Action: 'View',
@@ -294,5 +298,17 @@ export class LeadManagementComponent implements OnInit {
   public onSave(dataItem: any): void {
     console.log('Save button clicked for:', dataItem);
     // Add your custom logic for saving the data item here
+  }
+
+  public exportToExcel(): void {
+    const grid = document.querySelector('kendo-grid');
+    if (grid) {
+      (grid as any).saveAsExcel();
+    }
+  }
+
+  public onCreate(): void {
+    console.log('Create button clicked');
+    // Add logic to handle the creation of a new lead
   }
 }

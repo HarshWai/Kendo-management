@@ -46,10 +46,12 @@
     "@progress/kendo-licensing": "^1.5.0",
     "@progress/kendo-svg-icons": "^4.0.0",
     "@progress/kendo-theme-default": "^10.3.1",
+    "@types/xlsx": "^0.0.35",
     "bootstrap": "^5.3.5",
     "bootstrap-icons": "^1.11.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

@@ -9,8 +9,11 @@
             <input type="checkbox"> Board View
         </label>
 
-        <button class="button button-export">Export to excel</button>
-        <button class="button button-create">Create</button>
+        <button kendoButton (click)="exportToExcel()" [icon]="'file-excel'"
+            [primary]="true" class="button button-export">Export to
+            Excel</button>
+        <button class="button button-create"
+            (click)="onCreate()">Create</button>
 
     </div>
 </div>
@@ -79,9 +82,9 @@
 
 <kendo-grid
     [kendoGridBinding]="gridView"
-    kendoGridSelectBy="id"
+    kendoGridSelectBy="record_id"
     [(selectedKeys)]="mySelection"
-    [selectable]="{ mode: 'multiple', drag: true }"
+    [selectable]="{ mode: 'multiple', drag: false }"
     [pageSize]="20"
     [pageable]="true"
     [sortable]="true"
@@ -89,6 +92,7 @@
     [reorderable]="true"
     [resizable]="true"
     [height]="500"
+    [excel]="{ fileName: 'Leads.xlsx' }"
     [columnMenu]="{ filter: true }">
     <kendo-grid-checkbox-column
         [width]="45"
@@ -96,7 +100,8 @@
         [class]="{ 'text-center': true }"
         [resizable]="false"
         [columnMenu]="false"
-        [showSelectAll]="true"></kendo-grid-checkbox-column>
+        [showSelectAll]="true">
+    </kendo-grid-checkbox-column>
 
     <kendo-grid-column field="Action" title="Action" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
@@ -104,46 +109,123 @@
                 (click)="onActionClick(dataItem)">Action</button>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="record_id" title="Record Id"
-        [width]="100"></kendo-grid-column>
-    <kendo-grid-column field="last_name" title="Last Name"
-        [width]="150"></kendo-grid-column>
-    <kendo-grid-column field="first_name" title="First Name"
-        [width]="150"></kendo-grid-column>
-    <kendo-grid-column field="email" title="Email Address"
-        [width]="200"></kendo-grid-column>
-    <kendo-grid-column field="phone_type" title="Phone Type"
-        [width]="120"></kendo-grid-column>
-    <kendo-grid-column field="lmp_id" title="LMP Lead Id"
-        [width]="120"></kendo-grid-column>
+    <kendo-grid-column field="record_id" title="Record Id" [width]="100">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.record_id"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="last_name" title="Last Name" [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.last_name"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="first_name" title="First Name" [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.first_name"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="email" title="Email Address" [width]="200">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="email" [(ngModel)]="dataItem.email"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="phone_type" title="Phone Type" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.phone_type"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="lmp_id" title="LMP Lead Id" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.lmp_id"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="appointment_type" title="Appointment Type"
-        [width]="150"></kendo-grid-column>
+        [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.appointment_type"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="booking_agency" title="Booking Agency"
-        [width]="150"></kendo-grid-column>
+        [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.booking_agency"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="assigned_date" title="Assigned Date"
-        [width]="120"></kendo-grid-column>
-    <kendo-grid-column field="sales_rep" title="Sales Rep"
-        [width]="150"></kendo-grid-column>
-    <kendo-grid-column field="coordinator" title="Coordinator"
-        [width]="150"></kendo-grid-column>
+        [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="date" [(ngModel)]="dataItem.assigned_date"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="sales_rep" title="Sales Rep" [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.sales_rep"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="coordinator" title="Coordinator" [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.coordinator"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="sync_to_mobile" title="Sync to Mobile"
-        [width]="120"></kendo-grid-column>
+        [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="checkbox" [(ngModel)]="dataItem.sync_to_mobile"
+                class="form-check-input" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="created_sources" title="Created Sources"
-        [width]="150"></kendo-grid-column>
+        [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.created_sources"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="mobile_sync_status" title="Mobile Sync Status"
-        [width]="150"></kendo-grid-column>
+        [width]="150">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="text" [(ngModel)]="dataItem.mobile_sync_status"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="effective_date" title="Effective Date"
-        [width]="120"></kendo-grid-column>
+        [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="date" [(ngModel)]="dataItem.effective_date"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="valid_through" title="Valid Through"
-        [width]="120"></kendo-grid-column>
+        [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="date" [(ngModel)]="dataItem.valid_through"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
 
     <!-- Move the Edit column to the right side of the page by placing it at the end -->
     <kendo-grid-column field="edit" title="Edit" [width]="170" [sticky]="true"
         class="d-flex">
         <ng-template kendoGridCellTemplate let-dataItem>
             <button class="btn btn-primary"
+                *ngIf="dataItem.record_id; else saveButton"
                 (click)="onEdit(dataItem)">Edit</button>
-            <button class="btn btn-danger ms-3"
+            <ng-template #saveButton>
+                <button class="btn btn-success"
+                    (click)="onSave(dataItem)">Save</button>
+            </ng-template>
+            <button class="btn btn-danger ms-2"
                 (click)="onDelete(dataItem)">Delete</button>
         </ng-template>
     </kendo-grid-column>
