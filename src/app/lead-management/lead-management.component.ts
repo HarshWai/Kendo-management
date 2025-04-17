@@ -301,10 +301,10 @@ export class LeadManagementComponent implements OnInit {
   }
 
   public exportToExcel(): void {
-    const grid = document.querySelector('kendo-grid');
-    if (grid) {
-      (grid as any).saveAsExcel();
-    }
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.gridView);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+    XLSX.writeFile(wb, 'LeadData.xlsx');
   }
 
   public onCreate(): void {
