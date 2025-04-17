@@ -86,13 +86,14 @@
     [(selectedKeys)]="mySelection"
     [selectable]="{ mode: 'multiple', drag: false }"
     [pageSize]="20"
-    [pageable]="true"
+    [pageable]="{ buttonCount: 5, pageSizes: true}"
     [sortable]="true"
     [groupable]="false"
     [reorderable]="true"
     [resizable]="true"
     [height]="500"
     [columnMenu]="{ filter: true }">
+
     <!-- Checkbox Select Column -->
     <kendo-grid-checkbox-column
         [width]="45"
