@@ -25,22 +25,6 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 
-/* Button styling */
-button {
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 10px;
-}
-
-button:hover {
-    background-color: #2ecc71;
-}
-
 /* Table styling */
 table {
     width: 100%;
@@ -93,9 +77,8 @@ table th {
     gap: 5px;
 }
 
-button {
-    background-color: #3498db;
-    color: white;
+/* General button styling */
+.button {
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -106,16 +89,40 @@ button {
     gap: 5px;
 }
 
-button:hover {
+/* Primary button styling */
+.button-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.button-primary:hover {
     background-color: #0D2C6C;
 }
 
-.export-button {
+/* Export button styling */
+.button-export {
     background-color: #A6CE39;
+    color: white;
 }
 
-.create-button {
+/* Create button styling */
+.button-create {
     background-color: #A6CE39;
+    color: white;
+}
+
+/* No-hover button styling */
+.button-no-hover {
+    background-color: white !important;
+    color: #212529;
+    border: 1px solid #ccc;
+}
+
+.button-no-hover:hover,
+.button-no-hover:focus {
+    background-color: white !important;
+    color: inherit !important;
+    text-decoration: none;
 }
 
 .customer-photo {
@@ -160,38 +167,18 @@ button:hover {
     gap: 10px;
 }
 
-.no-hover-btn {
-    background-color: white !important;
-    color: #212529;
-    border: 1px solid #ccc;
+/* Adding styles for the buttons in the specified div */
+.d-flex3 button {
+    background-color: #A6CE39;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
 }
 
-.no-hover-menu {
-    background-color: white !important;
-    border: 1px solid #ccc;
-}
-
-.no-hover-item:hover,
-.no-hover-item:focus {
-    background-color: white !important;
-    color: inherit !important;
-    text-decoration: none;
-}
-
-.no-hover-btn {
-    background-color: white !important;
-    color: #212529;
-    border: 1px solid #ccc;
-}
-
-.no-hover-menu {
-    background-color: white !important;
-    border: 1px solid #ccc;
-}
-
-.no-hover-item:hover,
-.no-hover-item:focus {
-    background-color: white !important;
-    color: inherit !important;
-    text-decoration: none;
+.d-flex button:hover {
+    background-color: #0D2C6C;
 }

@@ -41,3 +41,34 @@
     border-radius: 50%;
     font-weight: bold;
 }
+
+/* Dropdown button color */
+#dropdownPreferences {
+    background-color: white !important;
+    color: #000 !important;
+}
+
+/* Ensure search bar and button are not joined */
+.input-group>input {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group>button {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+/* Button colors */
+.btn-success {
+    background-color: #A6CE39 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Remove all button colors and make them white */
+.btn {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+}

@@ -8,12 +8,72 @@
         <label class="me-3">
             <input type="checkbox"> Board View
         </label>
-        <button class="export-button me-2">
-            <i class="fa fa-file-excel"></i> Export to Excel
+
+        <button class="button button-export">Export to excel</button>
+        <button class="button button-create">Create</button>
+
+    </div>
+</div>
+
+<!-- Converted toolbar to Bootstrap and moved outside of Kendo Grid -->
+<div class="d-flex flex-wrap align-items-center mb-3">
+    <!-- Left Section: Filters and Search -->
+    <div class="d-flex align-items-center flex-wrap me-auto">
+        <!-- Dropdown for Leads -->
+        <div class="dropdown me-3 border rounded">
+            <button class="btn dropdown-toggle" type="button"
+                id="dropdownMenuButton" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ selectedLeadValue || 'All Leads' }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectLead('Lead 1')">Lead 1</a></li>
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectLead('Lead 2')">Lead 2</a></li>
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectLead('Lead 3')">Lead 3</a></li>
+            </ul>
+        </div>
+
+        <!-- Dropdown for Preferences -->
+        <div class="dropdown me-3 border rounded">
+            <button class="btn dropdown-toggle" type="button"
+                id="dropdownPreferences" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ selectedPreference || 'Select Saved Preferences' }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownPreferences">
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectPreference('Preference 1')">Preference
+                        1</a></li>
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectPreference('Preference 2')">Preference
+                        2</a></li>
+                <li><a class="dropdown-item" href="#"
+                        (click)="selectPreference('Preference 3')">Preference
+                        3</a></li>
+            </ul>
+        </div>
+
+        <!-- Search Input -->
+        <div class="input-group me-3" style="width: 185px;">
+            <input type="text" class="form-control"
+                placeholder="Type Search Keyword" (input)="onFilter($event)">
+        </div>
+
+        <!-- Search Button -->
+        <button class="btn" type="button"
+            style="background-color: #A6CE39; color: white;">
+            <i class="fa fa-search"></i>
         </button>
-        <button class="create-button">
-            <i class="fa fa-plus"></i> Create
-        </button>
+    </div>
+
+    <!-- Right Section: Action Buttons -->
+    <div class="d-flex3 align-items-center ms-auto">
+        <button class="btn me-2">Clear Filter</button>
+        <button class="btn me-2">Bulk Edit</button>
+        <button class="btn">Save Preferences</button>
     </div>
 </div>
 
@@ -30,84 +90,6 @@
     [resizable]="true"
     [height]="500"
     [columnMenu]="{ filter: true }">
-    <ng-template kendoGridToolbarTemplate>
-        <!-- Dropdown -->
-        <div class="dropdown" style="z-index: 1020;">
-            <button class="btn dropdown-toggle no-hover-btn" type="button"
-                id="dropdownMenuButton" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                {{ selectedLeadValue || 'All Leads' }}
-            </button>
-            <ul class="dropdown-menu no-hover-menu"
-                aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectLead('Lead 1')">Lead 1</a></li>
-                <li><a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectLead('Lead 2')">Lead 2</a></li>
-                <li><a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectLead('Lead 3')">Lead 3</a></li>
-            </ul>
-        </div>
-
-        <div class="custom-dropdown position-relative" style="z-index: 1050;">
-            <button class="btn dropdown-toggle no-hover-btn" type="button"
-                id="dropdownPreferences" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                {{ selectedPreference || 'Select Saved Preferences' }}
-            </button>
-            <ul class="dropdown-menu no-hover-menu"
-                aria-labelledby="dropdownPreferences">
-                <li>
-                    <a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectPreference('Preference 1')">
-                        Preference 1
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectPreference('Preference 2')">
-                        Preference 2
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item no-hover-item" href="#"
-                        (click)="selectPreference('Preference 3')">
-                        Preference 3
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <kendo-textbox
-            [style.width.px]="165"
-            placeholder="Type Search Keyword"
-            (valueChange)="onFilter($event)"></kendo-textbox>
-        <!-- Include this in your Bootstrap-based layout -->
-        <!-- Custom Search Button with Green Background -->
-        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
-            style="background-color: #A6CE39;">
-            <i class="fa fa-search"></i>
-
-        </button>
-
-        <kendo-grid-spacer></kendo-grid-spacer>
-        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
-            style="background-color: #A6CE39;">
-            <span>Clear filter</span>
-
-        </button>
-        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
-            style="background-color: #A6CE39;">
-            <span>Bulk Edit</span>
-
-        </button>
-        <button class="btn text-white d-flex align-items-center gap-2 px-3 py-2"
-            style="background-color: #A6CE39;">
-            <span>Save Preferances</span>
-
-        </button>
-
-    </ng-template>
     <kendo-grid-checkbox-column
         [width]="45"
         [headerClass]="{ 'text-center': true }"
@@ -116,52 +98,52 @@
         [columnMenu]="false"
         [showSelectAll]="true"></kendo-grid-checkbox-column>
 
-    <kendo-grid-column field="Action" title="Action" [width]="220">
+    <kendo-grid-column field="Action" title="Action" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
             <button class="btn btn-primary"
                 (click)="onActionClick(dataItem)">Action</button>
         </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="record_id" title="Record Id"
-        [width]="220"></kendo-grid-column>
+        [width]="100"></kendo-grid-column>
     <kendo-grid-column field="last_name" title="Last Name"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="first_name" title="First Name"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="email" title="Email Address"
-        [width]="220"></kendo-grid-column>
+        [width]="200"></kendo-grid-column>
     <kendo-grid-column field="phone_type" title="Phone Type"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
     <kendo-grid-column field="lmp_id" title="LMP Lead Id"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
     <kendo-grid-column field="appointment_type" title="Appointment Type"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="booking_agency" title="Booking Agency"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="assigned_date" title="Assigned Date"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
     <kendo-grid-column field="sales_rep" title="Sales Rep"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="coordinator" title="Coordinator"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="sync_to_mobile" title="Sync to Mobile"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
     <kendo-grid-column field="created_sources" title="Created Sources"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="mobile_sync_status" title="Mobile Sync Status"
-        [width]="220"></kendo-grid-column>
+        [width]="150"></kendo-grid-column>
     <kendo-grid-column field="effective_date" title="Effective Date"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
     <kendo-grid-column field="valid_through" title="Valid Through"
-        [width]="220"></kendo-grid-column>
+        [width]="120"></kendo-grid-column>
 
     <!-- Move the Edit column to the right side of the page by placing it at the end -->
-    <kendo-grid-column field="edit" title="Edit" [width]="220" [sticky]="true"
+    <kendo-grid-column field="edit" title="Edit" [width]="170" [sticky]="true"
         class="d-flex">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <button class="btn btn-primary "
+            <button class="btn btn-primary"
                 (click)="onEdit(dataItem)">Edit</button>
-            <button class="btn btn-danger"
+            <button class="btn btn-danger ms-3"
                 (click)="onDelete(dataItem)">Delete</button>
         </ng-template>
     </kendo-grid-column>
