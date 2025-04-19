@@ -26,7 +26,7 @@
         <div class="dropdown me-3 border rounded">
             <button class="btn dropdown-toggle" type="button"
                 id="dropdownMenuButton" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false">All Leads
 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -40,7 +40,7 @@
         <div class="dropdown me-3 border rounded">
             <button class="btn dropdown-toggle" type="button"
                 id="dropdownPreferences" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"> Preferences
 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownPreferences">
@@ -68,6 +68,12 @@
 
     <!-- Right Section: Action Buttons -->
     <div class="d-flex3 align-items-center ms-auto">
+        <div class=" border-0 toggle-pill">
+            <input type="radio" id="non-intl" name="toggle" checked>
+            <label for="non-intl">Non-Intl</label>
+            <input type="radio" id="intl" name="toggle">
+            <label for="intl">Intl</label>
+        </div>
         <button class="btn me-2">Clear Filter</button>
         <button class="btn me-2">Bulk Edit</button>
         <button class="btn">Save Preferences</button>
@@ -106,8 +112,8 @@
     </kendo-grid-column>
 
     <!-- Editable Fields -->
-    <kendo-grid-column field="id" title="ID" [width]="100"
-        [editable]="false"></kendo-grid-column>
+    <!-- <kendo-grid-column field="id" title="ID" [width]="100"
+        [editable]="false"></kendo-grid-column> -->
 
     <kendo-grid-column field="last_name" title="Last Name" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>

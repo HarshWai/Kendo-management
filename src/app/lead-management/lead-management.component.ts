@@ -76,7 +76,6 @@ export class LeadManagementComponent implements OnInit {
 
     this.isCreating = true;
     this.newRecord = {
-      id: null,
       last_name: '',
       first_name: '',
       email: '',
@@ -99,6 +98,7 @@ export class LeadManagementComponent implements OnInit {
     this.gridData = [this.newRecord, ...this.gridData];
     this.gridView = [...this.gridData];
   }
+
 
   onSaveNew(dataItem: any): void {
     this.productService.createProduct(dataItem).subscribe({
@@ -140,11 +140,11 @@ export class LeadManagementComponent implements OnInit {
   }
 
   onDelete(dataItem: any): void {
-    if (confirm('Are you sure you want to delete this record?')) {
-      this.productService.deleteProduct(dataItem.id).subscribe({
-        next: () => this.getAllProducts(),
-        error: (err) => console.error('Error deleting product:', err)
-      });
-    }
+
+    this.productService.deleteProduct(dataItem.id).subscribe({
+      next: () => this.getAllProducts(),
+      error: (err) => console.error('Error deleting product:', err)
+    });
+
   }
 }
