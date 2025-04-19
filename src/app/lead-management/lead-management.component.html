@@ -9,7 +9,7 @@
             <input type="checkbox"> Board View
         </label>
 
-        <button kendoButton (click)="exportToExcel()" [icon]="'file-excel'"
+        <button kendoButton [icon]="'file-excel'"
             [primary]="true" class="button button-export">Export to
             Excel</button>
         <button class="button button-create"
@@ -27,15 +27,12 @@
             <button class="btn dropdown-toggle" type="button"
                 id="dropdownMenuButton" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                {{ selectedLeadValue || 'All Leads' }}
+
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectLead('Lead 1')">Lead 1</a></li>
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectLead('Lead 2')">Lead 2</a></li>
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectLead('Lead 3')">Lead 3</a></li>
+                <li><a class="dropdown-item" href="#">Lead 1</a></li>
+                <li><a class="dropdown-item" href="#">Lead 2</a></li>
+                <li><a class="dropdown-item" href="#">Lead 3</a></li>
             </ul>
         </div>
 
@@ -44,17 +41,14 @@
             <button class="btn dropdown-toggle" type="button"
                 id="dropdownPreferences" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                {{ selectedPreference || 'Select Saved Preferences' }}
+
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownPreferences">
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectPreference('Preference 1')">Preference
+                <li><a class="dropdown-item" href="#">Preference
                         1</a></li>
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectPreference('Preference 2')">Preference
+                <li><a class="dropdown-item" href="#">Preference
                         2</a></li>
-                <li><a class="dropdown-item" href="#"
-                        (click)="selectPreference('Preference 3')">Preference
+                <li><a class="dropdown-item" href="#">Preference
                         3</a></li>
             </ul>
         </div>
@@ -62,7 +56,7 @@
         <!-- Search Input -->
         <div class="input-group me-3" style="width: 185px;">
             <input type="text" class="form-control"
-                placeholder="Type Search Keyword" (input)="onFilter($event)">
+                placeholder="Type Search Keyword">
         </div>
 
         <!-- Search Button -->
@@ -81,59 +75,53 @@
 </div>
 
 <kendo-grid
-    [kendoGridBinding]="gridView"
-    kendoGridSelectBy="record_id"
+    [data]="gridData"
+    [kendoGridBinding]="gridData"
+    kendoGridSelectBy="id"
     [(selectedKeys)]="mySelection"
     [selectable]="{ mode: 'multiple', drag: false }"
-    [pageSize]="20"
-    [pageable]="{ buttonCount: 5, pageSizes: true}"
+    [pageSize]="10"
+    [pageable]="{ buttonCount: 5, pageSizes: true }"
     [sortable]="true"
     [groupable]="false"
     [reorderable]="true"
     [resizable]="true"
-    [height]="500"
     [columnMenu]="{ filter: true }">
 
-    <!-- Checkbox Select Column -->
+    <!-- Checkbox Column -->
     <kendo-grid-checkbox-column
         [width]="45"
+        [showSelectAll]="true"
         [headerClass]="{ 'text-center': true }"
         [class]="{ 'text-center': true }"
         [resizable]="false"
-        [columnMenu]="false"
-        [showSelectAll]="true"></kendo-grid-checkbox-column>
+        [columnMenu]="false">
+    </kendo-grid-checkbox-column>
 
     <!-- Action Button -->
-    <kendo-grid-column field="Action" title="Action" [width]="150">
+    <kendo-grid-column field="action" title="Action" [width]="100">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <button class="btn btn-primary"
-                (click)="onActionClick(dataItem)">Action</button>
+            <button class="btn btn-info btn-sm">View</button>
         </ng-template>
     </kendo-grid-column>
 
-    <!-- Editable Columns -->
-    <kendo-grid-column field="record_id" title="Record Id" [width]="100">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.record_id"
-                class="form-control" />
-        </ng-template>
-    </kendo-grid-column>
+    <!-- Editable Fields -->
+    <kendo-grid-column field="id" title="ID" [width]="100"
+        [editable]="false"></kendo-grid-column>
 
     <kendo-grid-column field="last_name" title="Last Name" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.last_name"
-                class="form-control" />
+            <input [(ngModel)]="dataItem.last_name" class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="first_name" title="First Name" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.first_name"
-                class="form-control" />
+            <input [(ngModel)]="dataItem.first_name" class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="email" title="Email Address" [width]="200">
+    <kendo-grid-column field="email" title="Email" [width]="200">
         <ng-template kendoGridCellTemplate let-dataItem>
             <input type="email" [(ngModel)]="dataItem.email"
                 class="form-control" />
@@ -142,36 +130,20 @@
 
     <kendo-grid-column field="phone_type" title="Phone Type" [width]="120">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.phone_type"
-                class="form-control" />
-        </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-column field="lmp_id" title="LMP Lead Id" [width]="120">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.lmp_id"
-                class="form-control" />
+            <input [(ngModel)]="dataItem.phone_type" class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="appointment_type" title="Appointment Type"
-        [width]="150">
+        [width]="160">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.appointment_type"
-                class="form-control" />
-        </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-column field="booking_agency" title="Booking Agency"
-        [width]="150">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.booking_agency"
+            <input [(ngModel)]="dataItem.appointment_type"
                 class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="assigned_date" title="Assigned Date"
-        [width]="120">
+        [width]="130">
         <ng-template kendoGridCellTemplate let-dataItem>
             <input type="date" [(ngModel)]="dataItem.assigned_date"
                 class="form-control" />
@@ -180,44 +152,53 @@
 
     <kendo-grid-column field="sales_rep" title="Sales Rep" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.sales_rep"
-                class="form-control" />
+            <input [(ngModel)]="dataItem.sales_rep" class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="coordinator" title="Coordinator" [width]="150">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.coordinator"
-                class="form-control" />
+            <input [(ngModel)]="dataItem.coordinator" class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="lmp_id" title="LMP ID" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input [(ngModel)]="dataItem.lmp_id" class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="booking_agency" title="Booking Agency"
+        [width]="160">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input [(ngModel)]="dataItem.booking_agency" class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="sync_to_mobile" title="Sync to Mobile"
-        [width]="120">
+        [width]="140">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="checkbox" [(ngModel)]="dataItem.sync_to_mobile"
-                class="form-check-input" />
-        </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-column field="created_sources" title="Created Sources"
-        [width]="150">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.created_sources"
-                class="form-control" />
+            <input type="checkbox" [(ngModel)]="dataItem.sync_to_mobile" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="mobile_sync_status" title="Mobile Sync Status"
-        [width]="150">
+        [width]="160">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="text" [(ngModel)]="dataItem.mobile_sync_status"
+            <input [(ngModel)]="dataItem.mobile_sync_status"
+                class="form-control" />
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="created_sources" title="Source" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <input [(ngModel)]="dataItem.created_sources"
                 class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
     <kendo-grid-column field="effective_date" title="Effective Date"
-        [width]="120">
+        [width]="130">
         <ng-template kendoGridCellTemplate let-dataItem>
             <input type="date" [(ngModel)]="dataItem.effective_date"
                 class="form-control" />
@@ -225,27 +206,42 @@
     </kendo-grid-column>
 
     <kendo-grid-column field="valid_through" title="Valid Through"
-        [width]="120">
+        [width]="130">
         <ng-template kendoGridCellTemplate let-dataItem>
             <input type="date" [(ngModel)]="dataItem.valid_through"
                 class="form-control" />
         </ng-template>
     </kendo-grid-column>
 
-    <!-- Sticky Edit/Delete Column -->
-    <kendo-grid-column field="edit" title="Edit" [width]="170" [sticky]="true">
+    <!-- Sticky Column for Save/Edit/Delete -->
+    <kendo-grid-column title="Actions" [width]="200" [sticky]="true">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <button class="btn btn-primary"
-                *ngIf="dataItem.record_id; else saveButton"
-                (click)="onEdit(dataItem)">
-                Edit
-            </button>
-            <ng-template #saveButton>
-                <button class="btn btn-success"
-                    (click)="onSave(dataItem)">Save</button>
-            </ng-template>
-            <button class="btn btn-danger ms-2"
-                (click)="onDelete(dataItem)">Delete</button>
+            <!-- New Row: Show Save and Cancel -->
+            <ng-container *ngIf="dataItem.isNew">
+                <button class="btn btn-success btn-sm"
+                    (click)="onSaveNew(dataItem)">Save</button>
+                <button class="btn btn-secondary btn-sm ms-2"
+                    (click)="onCancelNew()">Cancel</button>
+            </ng-container>
+
+            <!-- Existing Row -->
+            <ng-container *ngIf="!dataItem.isNew">
+                <!-- If in Edit Mode -->
+                <ng-container *ngIf="dataItem.isEditing; else viewMode">
+                    <button class="btn btn-success btn-sm"
+                        (click)="onSave(dataItem)">Save</button>
+                    <button class="btn btn-secondary btn-sm ms-2"
+                        (click)="onCancelEdit(dataItem)">Cancel</button>
+                </ng-container>
+                <!-- Else Show View Mode Actions -->
+                <ng-template #viewMode>
+                    <button class="btn btn-primary btn-sm"
+                        (click)="onEdit(dataItem)">Edit</button>
+                    <button class="btn btn-danger btn-sm ms-2"
+                        (click)="onDelete(dataItem)">Delete</button>
+                </ng-template>
+            </ng-container>
         </ng-template>
     </kendo-grid-column>
+
 </kendo-grid>
