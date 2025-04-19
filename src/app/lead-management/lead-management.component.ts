@@ -11,7 +11,7 @@ import {
 import { KENDO_INPUTS } from '@progress/kendo-angular-inputs';
 import { DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
 import { FormsModule } from '@angular/forms';
-import { KENDO_BUTTONS } from '@progress/kendo-angular-buttons';
+import { KENDO_BUTTONS, KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-buttons';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { ProductserviceService } from './productservice.service';
 
@@ -34,7 +34,9 @@ import { ProductserviceService } from './productservice.service';
     DropDownListModule,
     KENDO_BUTTONS,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DropDownListModule,
+    KENDO_DROPDOWNBUTTON
   ]
 })
 export class LeadManagementComponent implements OnInit {
@@ -147,4 +149,34 @@ export class LeadManagementComponent implements OnInit {
     });
 
   }
+  public areaData: any[] = ['edited', 'created', 'deleted'];
+
+
+  // actions = [
+  //   { text: '▶ View Lead', value: 'viewLead' },
+  //   { text: '▶ Edit Lead', value: 'editLead' },
+  //   { text: '▶ Assign to Sales Rep', value: 'assignSalesRep' },
+  //   { text: '▶ Schedule Appointment', value: 'scheduleAppointment' },
+  //   { text: '▶ Possible Matches', value: 'possibleMatches' },
+  //   { text: '▶ Tie and Untie Qualified Leads', value: 'tieUntieLeads' },
+  //   { text: '▶ Audit Trail', value: 'auditTrail' },
+  //   { text: '▶ Estimates', value: 'estimates' },
+  //   { text: '▶ Lead Documents', value: 'leadDocuments' },
+  //   { text: '▶ Register With STS', value: 'registerSTS' },
+  //   { text: '▶ Survey List', value: 'surveyList' },
+  //   { text: '▶ Duplicate Lead', value: 'duplicateLead' },
+  //   { text: '▶ Chat', value: 'chat' },
+  // ];
+  // onActionSelect(action: string, dataItem: any): void {
+  //   // Perform the corresponding action based on the selected item
+  //   switch (action) {
+  //     case 'viewLead':
+  //       console.log('View Lead', dataItem);
+  //       break;
+  //     case 'editLead':
+  //       console.log('Edit Lead', dataItem);
+  //       break;
+  //     // Handle other cases here
+  //   }
+  // }
 }

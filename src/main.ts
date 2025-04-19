@@ -15,4 +15,9 @@ importProvidersFrom(BrowserAnimationsModule);
 bootstrapApplication(AppComponent, {
   providers: [provideHttpClient()],
 }).catch((err) => console.error(err));
+// bootstrapApplication(AppComponent, appConfig)
 
+//   .catch(err => console.error(err));
+
+
+// providers: [provideHttpClient()],

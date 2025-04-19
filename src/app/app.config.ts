@@ -1,16 +1,14 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';  // ✅ Use this
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule),
-    provideHttpClient()  // ✅ This is enough!
-    , // ✅ This is not needed here
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
+    provideAnimations() // ✅ This enables animation support!
   ],
 };

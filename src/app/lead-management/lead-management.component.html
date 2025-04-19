@@ -81,18 +81,20 @@
 </div>
 
 <kendo-grid
-    [data]="gridData"
     [kendoGridBinding]="gridData"
     kendoGridSelectBy="id"
     [(selectedKeys)]="mySelection"
-    [selectable]="{ mode: 'multiple', drag: false }"
+    [selectable]="{ checkboxOnly: true, mode: 'multiple', drag: false }"
     [pageSize]="10"
-    [pageable]="{ buttonCount: 5, pageSizes: true }"
+    [pageable]="true"
     [sortable]="true"
+    [navigable]="true"
+    scrollable="scrollable"
+    #grid
     [groupable]="false"
     [reorderable]="true"
     [resizable]="true"
-    [columnMenu]="{ filter: true }">
+    [columnMenu]="true">
 
     <!-- Checkbox Column -->
     <kendo-grid-checkbox-column
@@ -105,10 +107,22 @@
     </kendo-grid-checkbox-column>
 
     <!-- Action Button -->
-    <kendo-grid-column field="action" title="Action" [width]="100">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <button class="btn btn-info btn-sm">View</button>
+    <kendo-grid-column title="Actions" [width]="220"
+        headerClass="bg-blue-header">
+        <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+            <kendo-dropdownbutton [data]="areaData"
+                themeColor="primary">
+                Actions
+            </kendo-dropdownbutton>
+            <!-- <kendo-dropdowntree kendoDropDownTreeExpandable
+                [kendoDropDownTreeHierarchyBinding]="areaData"
+                placeholder="Actions" textField="text" valueField="id"
+                childrenField="areas"
+                class="action-dropdown-btn">
+            </kendo-dropdowntree> -->
+
         </ng-template>
+
     </kendo-grid-column>
 
     <!-- Editable Fields -->
