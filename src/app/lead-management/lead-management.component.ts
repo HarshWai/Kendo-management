@@ -119,6 +119,7 @@ export class LeadManagementComponent implements OnInit {
     this.gridData = this.gridData.filter(item => !item.isNew);
     this.gridView = [...this.gridData];
     this.isCreating = false;
+
   }
 
   onEdit(dataItem: any): void {

@@ -105,6 +105,10 @@ table th {
     color: white;
 }
 
+.k-menu-button {
+    background-color: #A6CE39;
+}
+
 /* Create button styling */
 .button-create {
     background-color: #A6CE39;
@@ -215,4 +219,18 @@ table th {
 
 .border-danger {
     border: 1px solid red !important;
+}
+
+
+
+::ng-deep .k-grid-header th.k-header {
+    background-color: #0D2C6C;
+
+    color: #ffffff;
+    text-align: center;
+}
+
+::ng-deep .k-grid-header .k-link {
+    background-color: #0D2C6C;
+    color: #ffffff;
 }
