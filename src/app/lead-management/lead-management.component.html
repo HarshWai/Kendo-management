@@ -143,8 +143,15 @@
 
     <kendo-grid-column field="email" title="Email" [width]="200">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="email" [(ngModel)]="dataItem.email"
-                class="form-control" />
+            <input
+                type="email"
+                name="email{{dataItem.id}}"
+                [(ngModel)]="dataItem.email"
+                #emailRef="ngModel"
+                class="form-control"
+                required
+                email
+                [ngClass]="{ 'border-danger': emailRef.invalid && emailRef.touched }" />
         </ng-template>
     </kendo-grid-column>
 

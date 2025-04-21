@@ -55,6 +55,7 @@ export class LeadManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+
   }
 
   getAllProducts(): void {
@@ -149,23 +150,24 @@ export class LeadManagementComponent implements OnInit {
     });
 
   }
-  public areaData: any[] = ['edited', 'created', 'deleted'];
+  public areaData: any[] = [
+    { text: ' View Lead', value: 'viewLead' },
+    { text: ' Edit Lead', value: 'editLead' },
+    { text: ' Assign to Sales Rep', value: 'assignSalesRep' },
+    { text: ' Schedule Appointment', value: 'scheduleAppointment' },
+    { text: ' Possible Matches', value: 'possibleMatches' },
+    { text: ' Tie and Untie Qualified Leads', value: 'tieUntieLeads' },
+    { text: ' Audit Trail', value: 'auditTrail' },
+    { text: ' Estimates', value: 'estimates' },
+    { text: ' Lead Documents', value: 'leadDocuments' },
+    { text: ' Register With STS', value: 'registerSTS' },
+    { text: ' Survey List', value: 'surveyList' },
+    { text: ' Duplicate Lead', value: 'duplicateLead' },
+    { text: ' Chat', value: 'chat' },
+  ];
 
 
-  // actions = [
-  //   { text: '▶ View Lead', value: 'viewLead' },
-  //   { text: '▶ Edit Lead', value: 'editLead' },
-  //   { text: '▶ Assign to Sales Rep', value: 'assignSalesRep' },
-  //   { text: '▶ Schedule Appointment', value: 'scheduleAppointment' },
-  //   { text: '▶ Possible Matches', value: 'possibleMatches' },
-  //   { text: '▶ Tie and Untie Qualified Leads', value: 'tieUntieLeads' },
-  //   { text: '▶ Audit Trail', value: 'auditTrail' },
-  //   { text: '▶ Estimates', value: 'estimates' },
-  //   { text: '▶ Lead Documents', value: 'leadDocuments' },
-  //   { text: '▶ Register With STS', value: 'registerSTS' },
-  //   { text: '▶ Survey List', value: 'surveyList' },
-  //   { text: '▶ Duplicate Lead', value: 'duplicateLead' },
-  //   { text: '▶ Chat', value: 'chat' },
+
   // ];
   // onActionSelect(action: string, dataItem: any): void {
   //   // Perform the corresponding action based on the selected item

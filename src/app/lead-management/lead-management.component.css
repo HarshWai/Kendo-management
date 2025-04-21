@@ -212,3 +212,7 @@ table th {
 }
 
 /* Ensure the dropdown appears on top */
+
+.border-danger {
+    border: 1px solid red !important;
+}
