@@ -26,10 +26,10 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductserviceService {
+  private apiUrl = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:3000/products';
 
 
 

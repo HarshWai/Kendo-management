@@ -43,10 +43,26 @@ export class LeadManagementComponent implements OnInit {
   public gridData: any[] = [];
   public gridView: any[] = [];
   public mySelection: number[] = [];
-
+  public searchTerm: string = '';
   public isCreating = false;
   public newRecord: any = {};
   public editedRecords: Set<number> = new Set();
+
+  public areaData: any[] = [
+    { text: 'View Lead', value: 'viewLead' },
+    { text: 'Edit Lead', value: 'editLead' },
+    { text: 'Assign to Sales Rep', value: 'assignSalesRep' },
+    { text: 'Schedule Appointment', value: 'scheduleAppointment' },
+    { text: 'Possible Matches', value: 'possibleMatches' },
+    { text: 'Tie and Untie Qualified Leads', value: 'tieUntieLeads' },
+    { text: 'Audit Trail', value: 'auditTrail' },
+    { text: 'Estimates', value: 'estimates' },
+    { text: 'Lead Documents', value: 'leadDocuments' },
+    { text: 'Register With STS', value: 'registerSTS' },
+    { text: 'Survey List', value: 'surveyList' },
+    { text: 'Duplicate Lead', value: 'duplicateLead' },
+    { text: 'Chat', value: 'chat' },
+  ];
 
   constructor(
     private productService: ProductserviceService,
@@ -55,12 +71,12 @@ export class LeadManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-
   }
 
   getAllProducts(): void {
     this.productService.getAllproducts().subscribe({
       next: (data: any[]) => {
+        console.log('Fetched data:', data); // Log the API response
         this.gridData = data.map(item => ({
           ...item,
           isNew: false,
@@ -74,10 +90,12 @@ export class LeadManagementComponent implements OnInit {
     });
   }
 
+
+
   onCreate(): void {
     if (this.isCreating) return;
-
     this.isCreating = true;
+
     this.newRecord = {
       last_name: '',
       first_name: '',
@@ -102,6 +120,23 @@ export class LeadManagementComponent implements OnInit {
     this.gridView = [...this.gridData];
   }
 
+  // Updated to filter data correctly based on each field in the product object
+  filterGrid(): void {
+    const term = this.searchTerm.toLowerCase().trim();
+
+    if (!term) {
+      this.gridView = [...this.gridData]; // Reset if search is empty
+      return;
+    }
+
+    this.gridView = this.gridData.filter(item =>
+      Object.keys(item).some(key =>
+        item[key]?.toString().toLowerCase().includes(term)
+      )
+    );
+  }
+
+
 
   onSaveNew(dataItem: any): void {
     this.productService.createProduct(dataItem).subscribe({
@@ -119,7 +154,6 @@ export class LeadManagementComponent implements OnInit {
     this.gridData = this.gridData.filter(item => !item.isNew);
     this.gridView = [...this.gridData];
     this.isCreating = false;
-
   }
 
   onEdit(dataItem: any): void {
@@ -140,46 +174,13 @@ export class LeadManagementComponent implements OnInit {
 
   onCancelEdit(dataItem: any): void {
     dataItem.isEditing = false;
-    this.getAllProducts(); // Optionally revert changes
+    this.getAllProducts();
   }
 
   onDelete(dataItem: any): void {
-
     this.productService.deleteProduct(dataItem.id).subscribe({
       next: () => this.getAllProducts(),
       error: (err) => console.error('Error deleting product:', err)
     });
-
   }
-  public areaData: any[] = [
-    { text: ' View Lead', value: 'viewLead' },
-    { text: ' Edit Lead', value: 'editLead' },
-    { text: ' Assign to Sales Rep', value: 'assignSalesRep' },
-    { text: ' Schedule Appointment', value: 'scheduleAppointment' },
-    { text: ' Possible Matches', value: 'possibleMatches' },
-    { text: ' Tie and Untie Qualified Leads', value: 'tieUntieLeads' },
-    { text: ' Audit Trail', value: 'auditTrail' },
-    { text: ' Estimates', value: 'estimates' },
-    { text: ' Lead Documents', value: 'leadDocuments' },
-    { text: ' Register With STS', value: 'registerSTS' },
-    { text: ' Survey List', value: 'surveyList' },
-    { text: ' Duplicate Lead', value: 'duplicateLead' },
-    { text: ' Chat', value: 'chat' },
-  ];
-
-
-
-  // ];
-  // onActionSelect(action: string, dataItem: any): void {
-  //   // Perform the corresponding action based on the selected item
-  //   switch (action) {
-  //     case 'viewLead':
-  //       console.log('View Lead', dataItem);
-  //       break;
-  //     case 'editLead':
-  //       console.log('Edit Lead', dataItem);
-  //       break;
-  //     // Handle other cases here
-  //   }
-  // }
 }
