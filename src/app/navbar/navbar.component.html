@@ -2,14 +2,16 @@
     <div class="container-fluid justify-content-end">
 
         <!-- Dark/Light Mode Toggle Button -->
-        <div class="ml-auto d-flex align-items-center">
-            <label class="dark-mode-toggle">
+        <div class="btn d-flex align-items-center">
+            <label class="dark-mode-toggle mb-0" style="cursor: pointer;">
                 <input type="checkbox" (change)="toggleDarkMode($event)"
-                    [checked]="isDarkMode" />
-                Dark Mode
+                    [checked]="isDarkMode"
+                    hidden />
+                <i class="bi"
+                    [ngClass]="isDarkMode ? 'bi-sun-fill text-warning' : 'bi-moon-stars-fill text-secondary'"></i>
             </label>
-
         </div>
+
         <!-- Mail Button -->
         <button class="btn icon-btn d-flex align-items-center">
             <i class="fas fa-envelope me-1"></i>
