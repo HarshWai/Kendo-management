@@ -126,7 +126,6 @@ body.dark-mode .k-grid-toolbar input[type="search"] {
     background-color: #444 !important;
     color: #f5f5f5 !important;
     border: 1px solid #555 !important;
-    border-radius: 4px;
 }
 
 body.dark-mode .k-grid-toolbar input[type="search"]:hover,
@@ -356,4 +355,44 @@ body.dark-mode .k-grid-toolbar input[type="search"]:hover,
 body.dark-mode .k-grid-toolbar input[type="search"]:focus {
     background-color: #555 !important;
     border-color: #8bc34a !important;
+}
+
+body.dark-mode .k-menu-button.k-button.k-button-md.k-rounded-md.k-button-solid-base.k-button-solid {
+    background-color: #333 !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #555 !important;
+}
+
+body.dark-mode .k-menu-button.k-button.k-button-md.k-rounded-md.k-button-solid-base.k-button-solid:hover {
+    background-color: #444 !important;
+    color: #fff !important;
+    border-color: #8bc34a !important;
+}
+
+body.dark-mode .k-menu-button.k-button.k-button-md.k-rounded-md.k-button-solid-base.k-button-solid:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #8bc34a55;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #ffffff !important;
+}
+
+body.dark-mode .dropdown.me-2 {
+    border: none;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: #444 !important;
+}
+
+body.dark-mode .btn-primary {
+    background-color: #4CAF50 !important;
+    color: white;
+    border-color: #4CAF50;
+}
+
+body.dark-mode .btn-primary:hover {
+    background-color: #45a049 !important;
+    border-color: #45a049;
 }
