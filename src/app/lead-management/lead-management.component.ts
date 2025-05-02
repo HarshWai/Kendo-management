@@ -76,7 +76,6 @@ export class LeadManagementComponent implements OnInit {
   getAllProducts(): void {
     this.productService.getAllproducts().subscribe({
       next: (data: any[]) => {
-        console.log('Fetched data:', data); // Log the API response
         this.gridData = data.map(item => ({
           ...item,
           isNew: false,
@@ -120,7 +119,6 @@ export class LeadManagementComponent implements OnInit {
     this.gridView = [...this.gridData];
   }
 
-  // Updated to filter data correctly based on each field in the product object
   filterGrid(): void {
     const term = this.searchTerm.toLowerCase().trim();
 
