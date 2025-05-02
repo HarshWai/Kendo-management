@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
   GridModule,
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { KENDO_BUTTONS, KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-buttons';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { ProductserviceService } from './productservice.service';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-lead-management',
@@ -36,7 +37,10 @@ import { ProductserviceService } from './productservice.service';
     FormsModule,
     HttpClientModule,
     DropDownListModule,
-    KENDO_DROPDOWNBUTTON
+    KENDO_DROPDOWNBUTTON,
+
+
+
   ]
 })
 export class LeadManagementComponent implements OnInit {
@@ -66,7 +70,8 @@ export class LeadManagementComponent implements OnInit {
 
   constructor(
     private productService: ProductserviceService,
-    private http: HttpClient
+    private http: HttpClient,
+    private elRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -133,52 +138,87 @@ export class LeadManagementComponent implements OnInit {
       )
     );
   }
+  // In your component.ts file, control editing manually
+  public editRow(item: any): void {
+    this.gridData.forEach(i => i.isEditing = false); // close others
+    item.isEditing = true;
+  }
 
+  public saveRow(item: any): void {
+    item.isEditing = false;
 
-
-  onSaveNew(dataItem: any): void {
-    this.productService.createProduct(dataItem).subscribe({
-      next: () => {
-        this.isCreating = false;
-        this.getAllProducts();
+    // Call the service to update the data in db.json
+    this.productService.updateProduct(item.id, item).subscribe({
+      next: (response) => {
+        console.log('Data saved successfully!', response);
       },
       error: (err) => {
-        console.error('Error creating product:', err);
+        console.error('Error saving data:', err);
       }
     });
   }
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const gridElement = this.elRef.nativeElement.querySelector('.k-grid'); // Adjust based on your table's class or ID
 
-  onCancelNew(): void {
-    this.gridData = this.gridData.filter(item => !item.isNew);
-    this.gridView = [...this.gridData];
-    this.isCreating = false;
+    // If the click is outside the table, save the data
+    if (gridElement && !gridElement.contains(event.target as Node)) {
+      // Save any unsaved data before the user clicks outside
+      this.gridData.forEach(item => {
+        if (item.isEditing) {
+          this.saveRow(item);
+        }
+      });
+    }
   }
 
-  onEdit(dataItem: any): void {
-    dataItem.isEditing = true;
-  }
 
-  onSave(dataItem: any): void {
-    this.productService.updateProduct(dataItem.id, dataItem).subscribe({
-      next: () => {
-        dataItem.isEditing = false;
-        this.getAllProducts();
-      },
-      error: (err) => {
-        console.error('Error updating product:', err);
-      }
-    });
-  }
 
-  onCancelEdit(dataItem: any): void {
-    dataItem.isEditing = false;
-    this.getAllProducts();
-  }
 
-  onDelete(dataItem: any): void {
-    this.productService.deleteProduct(dataItem.id).subscribe({
-      next: () => this.getAllProducts(),
-      error: (err) => console.error('Error deleting product:', err)
-    });
-  }
+
+  // onSaveNew(dataItem: any): void {
+  //   this.productService.createProduct(dataItem).subscribe({
+  //     next: () => {
+  //       this.isCreating = false;
+  //       this.getAllProducts();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error creating product:', err);
+  //     }
+  //   });
+  // }
+
+  // onCancelNew(): void {
+  //   this.gridData = this.gridData.filter(item => !item.isNew);
+  //   this.gridView = [...this.gridData];
+  //   this.isCreating = false;
+  // }
+
+  // onEdit(dataItem: any): void {
+  //   dataItem.isEditing = true;
+  // }
+
+  // onSave(dataItem: any): void {
+  //   this.productService.updateProduct(dataItem.id, dataItem).subscribe({
+  //     next: () => {
+  //       dataItem.isEditing = false;
+  //       this.getAllProducts();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error updating product:', err);
+  //     }
+  //   });
+  // }
+
+  // onCancelEdit(dataItem: any): void {
+  //   dataItem.isEditing = false;
+  //   this.getAllProducts();
+  // }
+
+  // onDelete(dataItem: any): void {
+  //   this.productService.deleteProduct(dataItem.id).subscribe({
+  //     next: () => this.getAllProducts(),
+  //     error: (err) => console.error('Error deleting product:', err)
+  //   });
+  // }
 }

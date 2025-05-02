@@ -45,12 +45,16 @@ export class ProductserviceService {
     return this.http.post<Product>(this.apiUrl, product);
   }
 
-  updateProduct(id: string, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, product);
+  updateProduct(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 
   deleteProduct(id: string) {
     return this.http.delete(`http://localhost:3000/products/${id}`); // Replace with your actual backend URL & port
+  }
+
+  saveData(item: any): Observable<any> {
+    return this.http.put('http://localhost:3000/products/${id}' + item.id, item);
   }
 
 
