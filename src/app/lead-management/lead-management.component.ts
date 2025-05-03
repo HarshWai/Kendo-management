@@ -7,6 +7,7 @@ import {
   KENDO_GRID,
   KENDO_GRID_EXCEL_EXPORT,
   KENDO_GRID_PDF_EXPORT,
+  GridDataResult,
 } from '@progress/kendo-angular-grid';
 import { KENDO_INPUTS } from '@progress/kendo-angular-inputs';
 import { DropDownListModule, KENDO_DROPDOWNLIST, KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
@@ -15,6 +16,7 @@ import { KENDO_BUTTONS, KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-but
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { ProductserviceService } from './productservice.service';
 import { Data } from '@angular/router';
+import { State, process } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-lead-management',
@@ -71,6 +73,17 @@ export class LeadManagementComponent implements OnInit {
     { text: 'Duplicate Lead', value: 'duplicateLead' },
     { text: 'Chat', value: 'chat' },
   ];
+  public gridState: State = {
+    skip: 0,
+    take: 10,
+    sort: [],
+    filter: undefined
+  };
+
+  public gridResult: GridDataResult = {
+    data: [],
+    total: 0
+  };
 
   constructor(
     private productService: ProductserviceService,
@@ -91,17 +104,32 @@ export class LeadManagementComponent implements OnInit {
           isNew: false,
           isEditing: false
         }));
-        this.gridView = [...this.gridData];
+
+        // Apply state if stored
+        const savedState = localStorage.getItem('gridState');
+        if (savedState) {
+          this.gridState = JSON.parse(savedState);
+        }
+
+        this.loadGridView();
       },
       error: (error) => {
         console.error('Error fetching products:', error);
       }
     });
   }
+  loadGridView(): void {
+    this.gridResult = process(this.gridData, this.gridState);
+  }
   loadPreferences(): void {
     this.productService.getPreferences().subscribe((data) => {
-      this.preferences = data.map((pref) => pref.name);  // Get only the name of the preferences
+      this.preferences = data.map((pref) => pref.name);  // Assuming preference has 'name' property
     });
+  }
+  public onStateChange(state: State): void {
+    this.gridState = state;
+    this.loadGridView();
+    localStorage.setItem('gridState', JSON.stringify(state));
   }
 
 
@@ -182,7 +210,7 @@ export class LeadManagementComponent implements OnInit {
     }
   }
   onPreferenceSelect(preference: string): void {
-    this.selectedPreference = preference;
+    this.selectedPreference = preference;  // Set the selected preference
     console.log(`Selected Preference: ${this.selectedPreference}`);
   }
 
@@ -190,14 +218,21 @@ export class LeadManagementComponent implements OnInit {
   savePreferences(): void {
     const newPreference = prompt('Please enter a new preference name:');
     if (newPreference && newPreference.trim() !== '') {
-      this.productService.addPreference(newPreference.trim()).subscribe(() => {
-        this.preferences.push(newPreference.trim());  // Update the local array
-        alert(`Preference "${newPreference}" has been added!`);
+      const preferenceObject = {
+        name: newPreference.trim(),
+        state: this.gridState
+      };
+
+      this.productService.addPreference(preferenceObject).subscribe(() => {
+        this.preferences.push(newPreference.trim());
+        alert(`Preference "${newPreference}" with grid state has been added!`);
       });
     } else {
       alert('Preference name cannot be empty.');
     }
   }
+
+
 
 
 

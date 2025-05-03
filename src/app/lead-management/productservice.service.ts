@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { State } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
 
 export interface Product {
@@ -62,10 +63,10 @@ export class ProductserviceService {
   }
 
   // Add a new preference to the server
-  addPreference(newPreference: string): Observable<any> {
-    const preference = { name: newPreference };  // Format the preference data
-    return this.http.post<any>(this.preferencesUrl, preference);  // POST request to add preference
+  addPreference(preference: { name: string; state: State }) {
+    return this.http.post('http://localhost:3000/preferences', preference);
   }
+
 
 
 }
