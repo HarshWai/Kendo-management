@@ -27,6 +27,7 @@ export interface Product {
 })
 export class ProductserviceService {
   private apiUrl = 'http://localhost:3000/products';
+  private preferencesUrl = 'http://localhost:3000/preferences';
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +56,15 @@ export class ProductserviceService {
 
   saveData(item: any): Observable<any> {
     return this.http.put('http://localhost:3000/products/${id}' + item.id, item);
+  }
+  getPreferences(): Observable<any[]> {
+    return this.http.get<any[]>(this.preferencesUrl);
+  }
+
+  // Add a new preference to the server
+  addPreference(newPreference: string): Observable<any> {
+    const preference = { name: newPreference };  // Format the preference data
+    return this.http.post<any>(this.preferencesUrl, preference);  // POST request to add preference
   }
 
 

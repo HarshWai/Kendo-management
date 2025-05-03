@@ -3,7 +3,7 @@
     {
       "id": "5bbc",
       "last_name": "sadfsdf",
-      "first_name": "shu",
+      "first_name": "shubham",
       "email": "dafssdfa",
       "phone_type": "dsaf",
       "appointment_type": "sdfasdfa",
@@ -23,7 +23,7 @@
     {
       "id": "f069",
       "last_name": "Gunjal ",
-      "first_name": "Harsh",
+      "first_name": "Harshvardhan",
       "email": "gunjalharsh@gmail.com",
       "phone_type": "Mobile ",
       "appointment_type": "staff",
@@ -37,7 +37,7 @@
       "created_sources": "web",
       "effective_date": "2025-04-21",
       "valid_through": "2025-04-24",
-      "isNew": true,
+      "isNew": false,
       "isEditing": false
     },
     {
@@ -139,6 +139,16 @@
       "valid_through": "2025-04-22",
       "isNew": false,
       "isEditing": false
+    }
+  ],
+  "preferences": [
+    {
+      "id": "0883",
+      "name": "agdsa"
+    },
+    {
+      "id": "d28e",
+      "name": "email"
     }
   ]
 }

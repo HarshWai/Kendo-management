@@ -51,6 +51,10 @@ export class LeadManagementComponent implements OnInit {
   public isCreating = false;
   public newRecord: any = {};
   public editedRecords: Set<number> = new Set();
+  selectedPreference: string | null = null;
+  preferences: string[] = [];
+
+  columnOrder: string[] = [];
 
   public areaData: any[] = [
     { text: 'View Lead', value: 'viewLead' },
@@ -76,6 +80,7 @@ export class LeadManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.loadPreferences();
   }
 
   getAllProducts(): void {
@@ -91,6 +96,11 @@ export class LeadManagementComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching products:', error);
       }
+    });
+  }
+  loadPreferences(): void {
+    this.productService.getPreferences().subscribe((data) => {
+      this.preferences = data.map((pref) => pref.name);  // Get only the name of the preferences
     });
   }
 
@@ -171,54 +181,28 @@ export class LeadManagementComponent implements OnInit {
       });
     }
   }
+  onPreferenceSelect(preference: string): void {
+    this.selectedPreference = preference;
+    console.log(`Selected Preference: ${this.selectedPreference}`);
+  }
+
+  // Method to save the selected preference
+  savePreferences(): void {
+    const newPreference = prompt('Please enter a new preference name:');
+    if (newPreference && newPreference.trim() !== '') {
+      this.productService.addPreference(newPreference.trim()).subscribe(() => {
+        this.preferences.push(newPreference.trim());  // Update the local array
+        alert(`Preference "${newPreference}" has been added!`);
+      });
+    } else {
+      alert('Preference name cannot be empty.');
+    }
+  }
 
 
 
 
 
-  // onSaveNew(dataItem: any): void {
-  //   this.productService.createProduct(dataItem).subscribe({
-  //     next: () => {
-  //       this.isCreating = false;
-  //       this.getAllProducts();
-  //     },
-  //     error: (err) => {
-  //       console.error('Error creating product:', err);
-  //     }
-  //   });
-  // }
 
-  // onCancelNew(): void {
-  //   this.gridData = this.gridData.filter(item => !item.isNew);
-  //   this.gridView = [...this.gridData];
-  //   this.isCreating = false;
-  // }
 
-  // onEdit(dataItem: any): void {
-  //   dataItem.isEditing = true;
-  // }
-
-  // onSave(dataItem: any): void {
-  //   this.productService.updateProduct(dataItem.id, dataItem).subscribe({
-  //     next: () => {
-  //       dataItem.isEditing = false;
-  //       this.getAllProducts();
-  //     },
-  //     error: (err) => {
-  //       console.error('Error updating product:', err);
-  //     }
-  //   });
-  // }
-
-  // onCancelEdit(dataItem: any): void {
-  //   dataItem.isEditing = false;
-  //   this.getAllProducts();
-  // }
-
-  // onDelete(dataItem: any): void {
-  //   this.productService.deleteProduct(dataItem.id).subscribe({
-  //     next: () => this.getAllProducts(),
-  //     error: (err) => console.error('Error deleting product:', err)
-  //   });
-  // }
 }
